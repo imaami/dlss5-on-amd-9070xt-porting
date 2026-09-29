@@ -1,6 +1,5 @@
 #pragma once
 #include "hip_reference_network.h"
-#include "native_hip_env_options.h"
 #include <string>
 
 /* Production HIP flags (HIP_FAST=1, graph off, skip 42,43,46) = the 0.31 regular package template. Since 2026-09-26 the
@@ -68,8 +67,6 @@ inline hip_reference::Options LmxxfProductionOptions(unsigned processing_w, unsi
     o.mh_feature_byte = o.mh_proj_diag_fb = o.mh_byte_stream = o.decoder_byte = o.mh_ffn_frag256 = true;
     // 0.31 template defaults (hip-game-flags.txt): one-head-per-wave, C512 32 tokens, ViT projection 64 columns, chain flags.
     o.wave_owned = o.c512_m32 = o.vit_proj_n64 = o.pdl = true;
-    if (const char *skip = std::getenv("DLSS5_SKIP_BLOCKS"))
-        o.skip_blocks = hip_reference::ParseSkipBlocks(skip);
-    NativeApplyHipEnvironment(o, true);
+    // dlsslop-amd: no DLSS5_* environment overrides; dlsslopd's own options apply.
     return o;
 }
