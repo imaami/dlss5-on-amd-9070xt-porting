@@ -1,3 +1,5 @@
+#define __builtin_amdgcn_s_barrier() (__builtin_amdgcn_fence(__ATOMIC_RELEASE, "workgroup", "local"), __builtin_amdgcn_s_barrier(), __builtin_amdgcn_fence(__ATOMIC_ACQUIRE, "workgroup", "local"))
+__attribute__((device)) __attribute__((always_inline)) unsigned char byte_F(float);
 // Production ViT matrix math. FP8 MLP, F16 QKV, raw FP32 accumulation.
 // Flat grid ceil(output_work_items/256), block32. One block = 16 tokens x 16 channels.
 // Tokens and output channels must be divisible by16; no scalar GEMM fallback.

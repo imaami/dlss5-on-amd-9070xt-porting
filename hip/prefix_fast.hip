@@ -1,3 +1,4 @@
+#define __builtin_amdgcn_s_barrier() (__builtin_amdgcn_fence(__ATOMIC_RELEASE, "workgroup", "local"), __builtin_amdgcn_s_barrier(), __builtin_amdgcn_fence(__ATOMIC_ACQUIRE, "workgroup", "local"))
 #define HIP_ISA_HALF 1
 #pragma clang fp contract(off)
 #pragma clang fp reassociate(off)

@@ -1,3 +1,4 @@
+#define __builtin_amdgcn_s_barrier() (__builtin_amdgcn_fence(__ATOMIC_RELEASE, "workgroup", "local"), __builtin_amdgcn_s_barrier(), __builtin_amdgcn_fence(__ATOMIC_ACQUIRE, "workgroup", "local"))
 #ifndef HIP_MH_SCALAR_DIAGONAL
 #define HIP_MH_SCALAR_DIAGONAL 1
 #endif
